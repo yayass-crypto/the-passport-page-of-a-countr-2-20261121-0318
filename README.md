@@ -44,8 +44,10 @@ MAKEFUN_OUTPUT_DIR=/output python3 main.py
 `main.py` is Python 3.13 standard library only — no network, no
 dependencies. It copies the rendered `entry.png` (1024×1024,
 273,281 bytes, under the 1 MiB cap) to the output directory and verifies
-the PNG signature, size, dimensions, and a byte-identical copy before
-finishing. The output is deterministic: every run writes the same bytes.
+the PNG signature, the IHDR chunk, size, dimensions, and a byte-identical
+copy before finishing. The output is deterministic: every run writes the
+same bytes (verified over three runs, sha256
+`f1f2ff9f0d163b0e19270acb576bd689407f9284571b0953d704f393e84a1cf5`).
 
 The spread itself was drawn programmatically with Pillow
 (see the build history in this repository's commit log); `entry.png` is

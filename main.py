@@ -65,6 +65,8 @@ def check_dimensions(path):
         head = handle.read(33)
     if len(head) < 33 or head[:8] != PNG_SIGNATURE:
         raise ValueError(f"{path} is not a PNG file")
+    if head[12:16] != b"IHDR":
+        raise ValueError(f"{path} has no IHDR chunk where one is expected")
     width, height = struct.unpack(">II", head[16:24])
     if width > 1024 or height > 1024:
         raise ValueError(f"{path} is {width}x{height}, over the 1024x1024 cap")
